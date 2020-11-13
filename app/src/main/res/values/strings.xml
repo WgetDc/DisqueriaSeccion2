@@ -3,4 +3,6 @@
     <string name="app_identificador">Identificador</string>
     <string name="app_autor">Artista</string>
     <string name="app_fecha_de_publicaci_n">Fecha de publicación</string>
+    <string name="app_ingrese_el_id">Ingrese el id</string>
+    <string name="app_buscar">Buscar</string>
 </resources>
