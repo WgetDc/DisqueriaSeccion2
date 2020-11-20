@@ -47,4 +47,29 @@ public class detalleActivity extends AppCompatActivity {
 
         db.close();
     }
+
+    public void eliminarDisco(View view){
+        gestorDeBaseDeDatos gestor = new gestorDeBaseDeDatos(this, "disquetera", null, 1);
+        SQLiteDatabase db = gestor.getWritableDatabase();
+
+        String id = edtDetalle_id.getText().toString();
+
+        if (!id.isEmpty()){
+            int filas = db.delete("discos", "id=" + id,null);
+
+            if (filas == 1){
+                Toast.makeText(this, "Se ha eliminado el disco", Toast.LENGTH_LONG).show();
+                db.close();
+                txtDetalle_artista.setText("Artista:");
+                txtDetalle_album.setText("Album:");
+                txtDetalle_fecha.setText("Fecha:");
+                edtDetalle_id.setText("");
+            }else {
+                Toast.makeText(this, "Ha ocurrido un error", Toast.LENGTH_SHORT).show();
+            }
+        }
+        db.close();
+    }
+
+    
 }

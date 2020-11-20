@@ -62,4 +62,38 @@ public class MainActivity extends AppCompatActivity {
             db.close();
         }
     }
+
+    public void editarDisco(View view){
+        gestorDeBaseDeDatos gestor = new gestorDeBaseDeDatos(this, "disquetera", null, 1);
+        SQLiteDatabase db = gestor.getWritableDatabase();
+
+        String id = edtMain_id.getText().toString();
+        String artistas = edtMain_artisas.getText().toString();
+        String album = edtMain_album.getText().toString();
+        String fecha = edtMain_fecha.getText().toString();
+
+        ContentValues fila = new ContentValues();
+
+        fila.put("artistas", artistas);
+        fila.put("album", album);
+        fila.put("fecha", fecha);
+
+        if (!id.isEmpty() && !artistas.isEmpty() && !album.isEmpty() && !fecha.isEmpty()){
+            int filas = db.update("discos", fila, "id=" + id, null);
+
+            if (filas == 1){
+                Toast.makeText(this, "El disco se actualizo correctamente", Toast.LENGTH_SHORT).show();
+                db.close();
+                edtMain_id.setText("");
+                edtMain_artisas.setText("");
+                edtMain_album.setText("");
+                edtMain_fecha.setText("");
+            }
+            else {
+                Toast.makeText(this, "ha ocurrido un error", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        db.close();
+    }
 }
